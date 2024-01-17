@@ -3,7 +3,7 @@
 import { SAVE_INFO_USER } from "../Types";
 
 const initialState = {
-    infoUser: null,
+    infoUser: {},
     // token: null,
     // listUserLoginPermission: [],
     // showLogin: 0,

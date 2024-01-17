@@ -27,29 +27,6 @@ export interface ProductDetailsPageProps {
 //   return <ProductDetails {...props} />;
 // };
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  quantity: number;
-  image: string;
-  import_price: number;
-  sell_price: number;
-  status: number;
-  display_order: number;
-  createdAt: Date;
-  category: {
-    id: number;
-    name: string;
-  };
-  brand: {
-    id: number;
-    name: string;
-  };
-  colors: any,
-  sizes: any
-}
-
 const ProductPage = (props: ProductDetailsPageProps) => {
   //   if (!props.product)
   //     return (

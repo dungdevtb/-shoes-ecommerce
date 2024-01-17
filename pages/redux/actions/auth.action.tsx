@@ -31,7 +31,7 @@ export const actionSaveInfoUser = (payload: any) => ({
     payload,
 });
 
-export const actionLogout = () => async () => {
+export const actionLogout = async (payload: any, dispatch: any) => {
     try {
         localStorage.removeItem('token')
         window.location.assign('/login')

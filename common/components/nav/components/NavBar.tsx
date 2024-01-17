@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import {
   AiOutlineMenu,
   AiOutlineShoppingCart,
@@ -19,27 +19,9 @@ import { navBarAnimation } from '../animations/NavBar.animations';
 import NavItem from './NavItem';
 import NavMenu from './NavMenu';
 import { actionLogout } from '@/pages/redux/actions/auth.action';
-import { Dropdown } from 'antd';
+import { Dropdown, message } from 'antd';
 import type { MenuProps } from 'antd';
-
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: (
-      <Link legacyBehavior href="/login" passHref>
-        Đăng nhập
-      </Link>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <Link legacyBehavior href="/register" passHref>
-        Đăng ký
-      </Link>
-    ),
-  },
-];
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
   const {
@@ -48,12 +30,17 @@ const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
 
   const [animate, setAnimate] = useState<'from' | 'to'>('from');
   const [opened, setOpened] = useState(false);
-
   const { pathname } = useRouter();
-
   const toggleCartOpened = useToggleCart();
-
   const setFilter = useSetRecoilState(filterAtom);
+  const [selectedItem, setSelectedItem] = useState<boolean>(false);
+  let dispatch = useDispatch();
+
+  // const { infoUser } = useSelector((state: any) => ({
+  //   infoUser: state.auth.infoUser,
+  // }), shallowEqual)
+
+  // console.log(infoUser);
 
   useEffect(() => {
     if (onHomePage) {
@@ -63,6 +50,69 @@ const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
       }, 1600);
     } else setAnimate('to');
   }, [onHomePage]);
+
+  // useEffect(() => {
+  //   const item = localStorage.getItem('token')
+  //   if (item) {
+  //     setSelectedItem(true)
+  //   } else {
+  //     setSelectedItem(false)
+  //   }
+  // }, [selectedItem])
+
+  const handelLogout = async () => {
+    try {
+      if (window.confirm('Are you sure, you want to logout?')) {
+        await actionLogout({}, dispatch);
+      }
+    } catch (error: any) {
+      message.error("Logout failed!", error)
+    }
+  }
+
+  const items: MenuProps['items'] = !selectedItem ? [
+    {
+      key: '1',
+      label: (
+        <Link legacyBehavior href="/login" passHref>
+          Đăng nhập
+        </Link>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <Link legacyBehavior href="/register" passHref>
+          Đăng ký
+        </Link>
+      ),
+    },
+  ] : [
+    {
+      key: '1',
+      label: (
+        <Link legacyBehavior href="/profile" passHref>
+          Trang cá nhân
+        </Link>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <Link legacyBehavior href="/change-password" passHref>
+          Đổi mật khẩu
+        </Link>
+      ),
+    },
+    {
+      key: '3',
+      label: (
+        <div onClick={handelLogout}>
+          Đăng xuất
+        </div>
+      )
+    }
+  ];
 
   return (
     <>
@@ -143,6 +193,7 @@ const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
                 <AiOutlineUser />
               </button>
             </Dropdown>
+
             <button
               className="btn-icon relative ml-3"
               onClick={toggleCartOpened}
