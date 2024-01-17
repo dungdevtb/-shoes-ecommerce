@@ -1,8 +1,8 @@
 import '../common/styles/global.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-
 import MainLayout from '@/common/layouts/main';
+import { wrapper } from './redux/store';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -18,4 +18,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default App;
+export default wrapper.withRedux(App);
