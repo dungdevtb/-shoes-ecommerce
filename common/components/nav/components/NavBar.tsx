@@ -19,9 +19,9 @@ import { navBarAnimation } from '../animations/NavBar.animations';
 import NavItem from './NavItem';
 import NavMenu from './NavMenu';
 import { actionLogout } from '@/pages/redux/actions/auth.action';
-import { Dropdown, message } from 'antd';
-import type { MenuProps } from 'antd';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+// import { Dropdown, message } from 'antd';
+// import type { MenuProps } from 'antd';
 
 const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
   const {
@@ -66,53 +66,53 @@ const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
         await actionLogout({}, dispatch);
       }
     } catch (error: any) {
-      message.error("Logout failed!", error)
+      alert("Logout failed!")
     }
   }
 
-  const items: MenuProps['items'] = !selectedItem ? [
-    {
-      key: '1',
-      label: (
-        <Link legacyBehavior href="/login" passHref>
-          Đăng nhập
-        </Link>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <Link legacyBehavior href="/register" passHref>
-          Đăng ký
-        </Link>
-      ),
-    },
-  ] : [
-    {
-      key: '1',
-      label: (
-        <Link legacyBehavior href="/profile" passHref>
-          Trang cá nhân
-        </Link>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <Link legacyBehavior href="/change-password" passHref>
-          Đổi mật khẩu
-        </Link>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <div onClick={handelLogout}>
-          Đăng xuất
-        </div>
-      )
-    }
-  ];
+  // const items: MenuProps['items'] = !selectedItem ? [
+  //   {
+  //     key: '1',
+  //     label: (
+  //       <Link legacyBehavior href="/login" passHref>
+  //         Đăng nhập
+  //       </Link>
+  //     ),
+  //   },
+  //   {
+  //     key: '2',
+  //     label: (
+  //       <Link legacyBehavior href="/register" passHref>
+  //         Đăng ký
+  //       </Link>
+  //     ),
+  //   },
+  // ] : [
+  //   {
+  //     key: '1',
+  //     label: (
+  //       <Link legacyBehavior href="/profile" passHref>
+  //         Trang cá nhân
+  //       </Link>
+  //     ),
+  //   },
+  //   {
+  //     key: '2',
+  //     label: (
+  //       <Link legacyBehavior href="/change-password" passHref>
+  //         Đổi mật khẩu
+  //       </Link>
+  //     ),
+  //   },
+  //   {
+  //     key: '3',
+  //     label: (
+  //       <div onClick={handelLogout}>
+  //         Đăng xuất
+  //       </div>
+  //     )
+  //   }
+  // ];
 
   return (
     <>
@@ -188,11 +188,11 @@ const NavBar = ({ onHomePage = false }: { onHomePage?: boolean }) => {
               </button>
             </Link> */}
 
-            <Dropdown menu={{ items }} placement="bottomRight">
+            {/* <Dropdown menu={{ items }} placement="bottomRight">
               <button className="btn-icon" aria-label="Account">
                 <AiOutlineUser />
               </button>
-            </Dropdown>
+            </Dropdown> */}
 
             <button
               className="btn-icon relative ml-3"

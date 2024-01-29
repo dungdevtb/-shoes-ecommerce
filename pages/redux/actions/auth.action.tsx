@@ -6,7 +6,6 @@
 /* eslint-disable import/prefer-default-export */
 import { fetchApi, fetchApiToken } from "../../utils/api";
 import { SAVE_INFO_USER } from "../Types";
-// import { message } from "antd";
 
 export const actionLogin = async (payload: any, dispatch: any) => {
     try {

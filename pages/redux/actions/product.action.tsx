@@ -7,7 +7,6 @@
 /* eslint-disable import/prefer-default-export */
 import { fetchApi } from "../../utils/api";
 import { SAVE_LIST_PRODUCT } from "../Types";
-import { message } from "antd";
 
 export const actionGetListProduct = async (payload: any, dispatch: any) => {
     try {
